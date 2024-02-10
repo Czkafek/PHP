@@ -1,7 +1,6 @@
 <?php
-
+    // plik do używania razem z plikiem index.php
     session_start();
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -24,15 +23,16 @@
 <?php
 
     if(isset($_POST["logout"])) {
-        session_destroy();
+        session_destroy(); // usuwa sesję
     }
-    if(isset($_SESSION["username"])) {
-        if(isset($_POST["show"])) {
-            ob_start();
+    if(isset($_POST["show"])) {
+        if(!empty($_SESSION)) {
             $username =  "username: {$_SESSION["username"]} <br>";
             $password =  "password: {$_SESSION["password"]}";
             echo $username . $password;
-            $_POST["show"] = null;
+        }
+        else {
+            echo "There is no data to show";
         }
     }
 
